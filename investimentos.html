@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Carteira - Echo Finance</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Echo Finance</div>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">Sobre Nós</a></li>
+                <li><a href="index.html#services">Serviços</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        let currentBalance = 2199.66;
+        let totalEntries = 9547.35;
+        let totalExits = 8300.00;
+
+        function registerTransaction(isEntry) {
+            const value = parseFloat(document.getElementById('input-value').value);
+            const description = document.getElementById('input-description').value;
+            const message = document.getElementById('message');
+
+            if (isNaN(value) || !description) {
+                message.textContent = 'Por favor, preencha todos os campos corretamente.';
+                message.style.color = 'red';
+                return;
+            }
+
+            if (isEntry) {
+                totalEntries += value;
+                currentBalance += value;
+                addEntryToTable(description, value);
+            } else {
+                if (value > currentBalance) {
+                    message.textContent = 'Saldo insuficiente para a transação.';
+                    message.style.color = 'red';
+                    return;
+                }
+                totalExits += value;
+                currentBalance -= value;
+                addExitToTable(description, value);
+            }
+
+            updateDashboard();
+            message.textContent = 'Transação registrada com sucesso!';
+            message.style.color = 'green';
+            closeModal(isEntry ? 'entry-modal' : 'exit-modal');
+        }
+
+        function addEntryToTable(description, value) {
+            const table = document.getElementById('entry-table');
+            const row = table.insertRow();
+            const dateCell = row.insertCell(0);
+            const descriptionCell = row.insertCell(1);
+            const valueCell = row.insertCell(2);
+            const today = new Date().toLocaleDateString('pt-BR');
+            dateCell.textContent = today;
+            descriptionCell.textContent = description;
+            valueCell.textContent = `R$ ${value.toFixed(2)}`;
+        }
+
+        function addExitToTable(description, value) {
+            const table = document.getElementById('exit-table');
+            const row = table.insertRow();
+            const dateCell = row.insertCell(0);
+            const descriptionCell = row.insertCell(1);
+            const valueCell = row.insertCell(2);
+            const today = new Date().toLocaleDateString('pt-BR');
+            dateCell.textContent = today;
+            descriptionCell.textContent = description;
+            valueCell.textContent = `R$ ${value.toFixed(2)}`;
+        }
+
+        function updateDashboard() {
+            document.getElementById('current-balance').textContent = `Seu saldo atual é: R$ ${currentBalance.toFixed(2)}`;
+            document.getElementById('total-entries').textContent = `R$ ${totalEntries.toFixed(2)}`;
+            document.getElementById('total-exits').textContent = `R$ ${totalExits.toFixed(2)}`;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', updateDashboard);
+    </script>
+</head>
+<body>
+
+    <section id="home">
+        <div class="welcome-text">
+            <h1>Investimentos</h1>
+            <p>Com a gente você investe e gerencia sua vida financeira. Simplifique sua vida conosco!</p>
+        </div>
+    </section>
+
+    <div class="dashboard">
+        <header>
+            <div class="status-bar">
+                <span>Continue contando com a gente!</span>
+            </div>
+        </header>
+
+        <div class="current-balance">
+            <span id="current-balance">Seu saldo atual é: R$ 2.199,66</span>
+        </div>
+        <section class="financial-section">
+            <div class="entry-exit-container">
+                <div class="entry">
+                    <h2>Entradas de Dinheiro</h2>
+                    <div class="summary">
+                        <span>Últimos 30 dias</span>
+                        <span class="amount" id="total-entries">R$ 9.547,35</span>
+                    </div>
+                    <button class="register-button" onclick="openModal('entry-modal')">Cadastrar nova entrada</button>
+                    <table id="entry-table">
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                        </tr>
+                        <tr>
+                            <td>05/04/24</td>
+                            <td>Depósito para Investimento</td>
+                            <td class="entry-value">R$ 5.000,00</td>
+                        </tr>
+                        <tr>
+                            <td>15/04/24</td>
+                            <td>Recebimento de Dividendos</td>
+                            <td class="entry-value">R$ 2.500,00</td>
+                        </tr>
+                        <tr>
+                            <td>25/04/24</td>
+                            <td>Depósito para Investimento</td>
+                            <td class="entry-value">R$ 2.047,35</td>
+                        </tr>
+                    </table>
+                    <button class="statement-button">Extrato completo</button>
+                </div>
+                <div class="exit">
+                    <h2>Saídas de Dinheiro</h2>
+                    <div class="summary">
+                        <span>Últimos 30 dias</span>
+                        <span class="amount" id="total-exits">R$ 8.300,00</span>
+                    </div>
+                    <button class="register-button" onclick="openModal('exit-modal')">Cadastrar nova saída</button>
+                    <table id="exit-table">
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                        </tr>
+                        <tr>
+                            <td>03/04/24</td>
+                            <td>Compra de Ações MXRF11</td>
+                            <td class="exit-value">R$ 3.000,00</td>
+                        </tr>
+                        <tr>
+                            <td>12/04/24</td>
+                            <td>Compra de Ações PETR4</td>
+                            <td class="exit-value">R$ 2.500,00</td>
+                        </tr>
+                        <tr>
+                            <td>20/04/24</td>
+                            <td>Compra de Ações LEVE3</td>
+                            <td class="exit-value">R$ 2.800,00</td>
+                        </tr>
+                    </table>
+                    <button class="statement-button">Extrato completo</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="entry-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('entry-modal')">&times;</span>
+            <h3>Cadastrar Nova Entrada</h3>
+            <div class="form-group">
+                <label for="input-description">Descrição:</label>
+                <input type="text" id="input-description">
+            </div>
+            <div class="form-group">
+                <label for="input-value">Valor:</label>
+                <input type="number" id="input-value" step="0.01">
+            </div>
+            <div class="form-group">
+                <button onclick="registerTransaction(true)">Registrar Entrada</button>
+                <button onclick="closeModal('entry-modal')">Cancelar</button>
+            </div>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <div id="exit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('exit-modal')">&times;</span>
+            <h3>Cadastrar Nova Saída</h3>
+            <div class="form-group">
+                <label for="exit-description">Descrição:</label>
+                <input type="text" id="exit-description">
+            </div>
+            <div class="form-group">
+                <label for="exit-value">Valor:</label>
+                <input type="number" id="exit-value" step="0.01">
+            </div>
+            <div class="form-group">
+                <button onclick="registerTransaction(false)">Registrar Saída</button>
+                <button onclick="closeModal('exit-modal')">Cancelar</button>
+            </div>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-column">
+            <a href="index.html#privacy">Política de Privacidade</a>
+            <a href="index.html#terms">Termos de Serviço</a>
+            <a href="index.html#contact">Contato</a>
+        </div>
+        <div class="social-media">
+            <a href="#"><img src="images/Facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="images/Twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="images/Youtube-icon.png" alt="Youtube" height="70"></a>
+        </div>
+        <div class="footer-column">
+            <p>Email: contato@echofinance.com</p>
+            <p>Telefone: (11) 1234-5678</p>
+            <p>FIAP RM:558296</p>
+        </div>
+    </footer>
+</body>
+</html>

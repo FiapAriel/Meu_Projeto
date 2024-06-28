@@ -1,0 +1,391 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #2c3e50;
+    color: white;
+}
+
+header .logo {
+    font-size: 1.5rem;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.auth-buttons button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.auth-buttons button:hover {
+    background-color: #2980b9;
+}
+
+section {
+    padding: 2rem;
+    text-align: center;
+    flex: 1;
+}
+
+#welcome-text h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+}
+
+.highlight {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+.highlight h2 {
+    color: #2c3e50;
+}
+
+/* Estilos do rodapé */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 100px;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+footer .quick-links a,
+footer .social-media a {
+    color: white;
+    text-decoration: none;
+}
+
+footer .social-media a img {
+    width: 75px;
+    height: 70px;
+}
+
+/* Estilos do modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container form label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-container form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-container form button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.form-container form button:hover {
+    background-color: #2980b9;
+}
+
+.login-google, .login-biometrics {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-google {
+    background-color: #db4437;
+}
+
+.login-biometrics {
+    background-color: #4285f4;
+}
+
+.login-google:hover {
+    background-color: #c23321;
+}
+
+.login-biometrics:hover {
+    background-color: #3367d6;
+}
+
+.form-container p {
+    margin: 1rem 0;
+}
+
+/* Estilos para entradas e saídas */
+.entry-value {
+    color: #28a745; /* Tom verde */
+}
+
+.exit-value {
+    color: #c0392b; /* Tom vermelho minimalista */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .auth-buttons {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    .footer-column {
+        margin: 0.5rem 0;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Estilos da dashboard */
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.dashboard-header {
+    text-align: center; /* Adicionado para centralizar o texto */
+}
+
+header .status-bar {
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 2rem;
+}
+
+header .current-balance {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.financial-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.entry, .exit {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.entry h2, .exit h2 {
+    color: #2c3e50;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.summary .amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.register-button, .statement-button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.statement-button {
+    background-color: #007bff;
+}
+
+.register-button:hover, .statement-button:hover {
+    opacity: 0.9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
